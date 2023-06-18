@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
-import { BrowserRouter as Router } from "react-router-dom";
 
-import Main from "./components/Main";
+import Public from "./components/Public";
+import Protected from "./components/Protected";
 import Nav from "./components/Nav";
 import AdminPage from "./components/AdminPage";
 
@@ -22,20 +22,10 @@ function App() {
       <div className="bg-gray-200 min-h-screen">
         <div className="flex flex-col items-center min-h-screen bg-gray-200">
           <Routes>
+            <Route path="/" element={<Public />} />
+            <Route path="/protected" element={<Protected token={token} />} />
             <Route
-              path="/"
-              element={
-                <Main
-                  isLoggedIn={isLoggedIn}
-                  token={token}
-                  logIn={logIn}
-                  logOut={logOut}
-                  isAdmin={isAdmin}
-                />
-              }
-            />
-            <Route
-              path="admin"
+              path="/admin"
               element={<AdminPage token={token} isAdmin={isAdmin} />}
             />
           </Routes>

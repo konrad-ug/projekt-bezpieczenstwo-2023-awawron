@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Keycloak from "keycloak-js";
+import { useNavigate } from "react-router-dom";
 
 const client = new Keycloak({
   url: import.meta.env.VITE_KEYCLOAK_URL,
@@ -8,6 +9,7 @@ const client = new Keycloak({
 });
 
 const useAuth = () => {
+  const navigate = useNavigate();
   const isRun = useRef(false);
   const [token, setToken] = useState(null);
   const [isLoggedIn, setLogin] = useState(false);
@@ -29,6 +31,7 @@ const useAuth = () => {
   }, []);
 
   function logOut() {
+    navigate("/");
     client.logout();
   }
 
