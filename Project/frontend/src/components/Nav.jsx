@@ -25,7 +25,13 @@ const Nav = ({ isLoggedIn, isAdmin, logIn, logOut }) => {
 
           {location.pathname === "/" ? (
             <button
-              onClick={() => navigate("/protected")}
+              onClick={() => {
+                if (isLoggedIn) {
+                  navigate("/protected");
+                } else {
+                  logIn();
+                }
+              }}
               className="ml-4 bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full"
             >
               User Page

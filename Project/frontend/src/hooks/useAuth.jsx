@@ -19,15 +19,11 @@ const useAuth = () => {
     if (isRun.current) return;
 
     isRun.current = true;
-    client
-      .init({
-        onLoad: "login-required",
-      })
-      .then((res) => {
-        setLogin(res);
-        setToken(client.token);
-        setIsAdmin(client.hasRealmRole("app-admin"));
-      });
+    client.init({}).then((res) => {
+      setLogin(res);
+      setToken(client.token);
+      setIsAdmin(client.hasRealmRole("app-admin"));
+    });
   }, []);
 
   function logOut() {
