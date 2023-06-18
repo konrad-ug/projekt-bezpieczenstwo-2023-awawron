@@ -11,6 +11,7 @@ const useAuth = () => {
   const isRun = useRef(false);
   const [token, setToken] = useState(null);
   const [isLoggedIn, setLogin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     if (isRun.current) return;
@@ -23,7 +24,7 @@ const useAuth = () => {
       .then((res) => {
         setLogin(res);
         setToken(client.token);
-        console.log(client);
+        setIsAdmin(client.hasRealmRole("app-admin"));
       });
   }, []);
 
@@ -31,7 +32,11 @@ const useAuth = () => {
     client.logout();
   }
 
-  return [isLoggedIn, token, logOut];
+  function logIn() {
+    client.login();
+  }
+
+  return [isLoggedIn, token, logIn, logOut, isAdmin];
 };
 
 export default useAuth;

@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import express from "express";
 
 import data from "./Routes/data.js";
+import admin from "./Routes/admin.js";
 import authenticate from "./Routes/authenticate.js";
 
 (async function () {
@@ -14,4 +15,5 @@ import authenticate from "./Routes/authenticate.js";
   );
 
   app.use("/data", authenticate, data);
+  app.use("/admin", authenticate, admin);
 })();
