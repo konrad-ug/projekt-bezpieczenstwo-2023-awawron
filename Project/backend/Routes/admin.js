@@ -1,11 +1,13 @@
 import express from "express";
 const router = express.Router();
 
-const admin_data = "Admin data";
+let admin_data = {
+  admin: "Admin data",
+};
 
 const getAdmin = async (req, res) => {
   try {
-    res.status(200).send(admin_data);
+    res.status(200).send(admin_data[admin]);
   } catch (err) {
     res.status(500).send(err);
   }
