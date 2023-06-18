@@ -8,9 +8,18 @@ Wszystkie ścieżki są względne, z poziomu folderu _Project_
 
 #### Keycloak
 
+Keycloak odpalony w dockerze z wolumenem komendą "docker run -d --name keycloak -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin -v /path/to/volume:/opt/jboss/keycloak/standalone/data quay.io/keycloak/keycloak:21.1.1 start-dev"
+
+Skonfigurowany realm znajduje się w folderze głównym repozytorium.
+
 #### Frontend
 
+W folderze _frontend/_ uruchomiony projekt React Vite za pomocą "npm run dev"
+Możliwe jest też "npm run build" i "npm run preview", lecz to wymaga zmiany **Valid redirect URIs** i **Valid post logout redirect URIs** w Keycloak admin UI.
+
 #### Backend
+
+W folderze _backend/_ uruchomiona aplikacja Node Express za pomocą "node index.js". Możliwe jest też użycie "npm start" aby włączyć aplikację z aktywnym nodemonem.
 
 ### Użycie
 
@@ -50,4 +59,4 @@ Przycisk "Admin Panel" pojawi się po zalogowaniu jako użytkownik z rolą admin
    Komponent _Protected_ (a także Admin Panel) wysyłają zapytanie do **backendu** o dane, wraz z tokenem uwierzytelniającym.
 
 5. _backend/Routes/authenticate.js_
-   Po przekierowaniu zapytania sprawdzamy czy token jest poprawny za pomocą klucza publicznego (w _.env_). Jeżeli weryfikacja odbędzie się poprawnie, dane są wysyłane, inaczej wyrzucany jest błąd.
+   Po przekierowaniu zapytania sprawdzamy czy token jest poprawny za pomocą klucza publicznego (w _.env_). Jeżeli weryfikacja odbędzie się poprawnie, dane są wysyłane, inaczej wyrzucany jest błąd. Jeżeli spróbujemy wejść w komponent na siłę to dla komponentu _Protected_ dostajemy informację o braku danych, a dla panelu admina dostajemy tylko błąd i napis "Unauthorized".
