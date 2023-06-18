@@ -10,12 +10,14 @@ Wszystkie ścieżki są względne, z poziomu folderu _Project_
 
 Keycloak odpalony w dockerze z wolumenem komendą "docker run -d --name keycloak -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin -v /path/to/volume:/opt/jboss/keycloak/standalone/data quay.io/keycloak/keycloak:21.1.1 start-dev"
 
-Skonfigurowany realm znajduje się w folderze głównym repozytorium.
+Skonfigurowany realm znajduje się w folderze głównym repozytorium w pliku _realm-export.json_. Przy tworzeniu nowego realmu w Keycloak jest możliwość wrzucenia tego pliku aby skonfigurować realm.
+
+.envs TBD
 
 #### Frontend
 
 W folderze _frontend/_ uruchomiony projekt React Vite za pomocą "npm run dev"
-Możliwe jest też "npm run build" i "npm run preview", lecz to wymaga zmiany **Valid redirect URIs** i **Valid post logout redirect URIs** w Keycloak admin UI.
+Możliwe jest też "npm run build" i "npm run preview", lecz to wymaga zmiany **Valid redirect URIs** i **Valid post logout redirect URIs** w Keycloak admin UI, ponieważ zmienia się wtedy port, na którym pracujemy.
 
 #### Backend
 
@@ -23,7 +25,7 @@ W folderze _backend/_ uruchomiona aplikacja Node Express za pomocą "node index.
 
 ### Użycie
 
-U nas jest użytkownik user (rola user) i admin (role _user_ i _admin_). Hasła są takie same jak nazwy użytkownika w celach testowych, a maile to _username_@gmail.com. Możliwe jest też rejestrowanie nowych użytkowników, domyślnie dostaną oni rolę _user_.
+W naszym realmie są role app-user oraz app-admin połączone z rolami user I admin w kliencie myclient. W celach testowych mam dane dla użytkownika user o mailu user@gmail.com z rolą user, oraz użytkownika admin admin@gmail.com z rolą admin. Możliwe jest też rejestrowanie nowych użytkowników, domyślnie dostaną oni rolę _user_, jednak nie ma dla nich personalizowanych danych.
 
 Po zalogowaniu można wejść w "User Page" (komponent _Protected.jsx_) i pojawi się tam "_username_ data" od serwera. Jeżeli spróbujemy wejść bez logowania zostaniemy przekierowani na stronę główną.
 

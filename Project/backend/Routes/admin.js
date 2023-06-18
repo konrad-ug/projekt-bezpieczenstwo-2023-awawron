@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router();
 
-let admin_data = "Admin data";
+const admin_data = "Admin data";
 
 const getAdmin = async (req, res) => {
   try {
