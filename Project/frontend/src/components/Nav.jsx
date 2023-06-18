@@ -1,8 +1,7 @@
 import React from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const Nav = ({ token, isLoggedIn, isAdmin, logIn, logOut }) => {
+const Nav = ({ isLoggedIn, isAdmin, logIn, logOut }) => {
   const navigate = useNavigate();
 
   return (
@@ -11,9 +10,6 @@ const Nav = ({ token, isLoggedIn, isAdmin, logIn, logOut }) => {
         <span className="font-semibold text-xl tracking-tight">My App</span>
       </div>
       <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-        <div className="text-sm lg:flex-grow">
-          {/* Add your navigation links here */}
-        </div>
         <div>
           {isLoggedIn ? (
             <button
