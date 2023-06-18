@@ -23,6 +23,7 @@ const useAuth = () => {
       .then((res) => {
         setLogin(res);
         setToken(client.token);
+        console.log(client);
       });
   }, []);
 

@@ -24,13 +24,18 @@ const Protected = ({ token }) => {
   }, []);
 
   return data ? (
-    <>
+    <div className="mt-4">
+      <div className="bg-red-500 text-white font-bold py-2 px-4 rounded">
+        Protected
+      </div>
       {data.map((rec, i) => (
-        <h3 key={i}>{rec}</h3>
+        <h3 key={i} className="text-xl">
+          {rec}
+        </h3>
       ))}
-    </>
+    </div>
   ) : (
-    <div>Protected</div>
+    <div className="mt-4">No data</div>
   );
 };
 
