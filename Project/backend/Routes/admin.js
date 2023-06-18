@@ -7,7 +7,7 @@ let admin_data = {
 
 const getAdmin = async (req, res) => {
   try {
-    res.status(200).send(admin_data[admin]);
+    res.status(200).send(admin_data["admin"]);
   } catch (err) {
     res.status(500).send(err);
   }

@@ -1,0 +1,30 @@
+{
+  "users": [
+    {
+      "username": "user",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "admin@gmail.com",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "admin"
+        }
+      ],
+      "realmRoles": ["app-admin"]
+    },
+    {
+      "username": "user",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "user@gmail.com",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "user"
+        }
+      ],
+      "realmRoles": ["app-user"]
+    }
+  ]
+}

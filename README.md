@@ -12,7 +12,18 @@ Keycloak odpalony w dockerze z wolumenem komendą "docker run -d --name keycloak
 
 Skonfigurowany realm znajduje się w folderze głównym repozytorium w pliku _realm-export.json_. Przy tworzeniu nowego realmu w Keycloak jest możliwość wrzucenia tego pliku aby skonfigurować realm.
 
-.envs TBD
+Z jakiegoś powodu eksport użytkowników mi nie zadziałał. Wszystkie ich istotne dane są w pliku user-export.json.
+
+#### Pliki .env
+
+_frontend/.env_ ma w sobie url Keycloaka, nazwę realmu oraz nazwę klienta. W tym przypadku:
+VITE_KEYCLOAK_URL=http://localhost:8080
+VITE_KEYCLOAK_REALM=Bezp
+VITE_KEYCLOAK_CLIENT=my-app
+
+_backend/.env_ ma w sobie port, na którym nasłuchuje serwer oraz klucz publiczny z _Realm settings_ => _Keys_ w admin UI Keycloaka. W moim przypadku:
+PORT=5000
+PUBLICKEY=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlsQ3lQ9AbLPMSWvvPAm3HTv1vnt7o2jXiskMPZKt54KI4aY5NMRngsfwPlSSjUNVJIbkOI5/bEelCF8TzXju4zXQHtItfQkFYDNHs7G/ZMeK4P26VYOxsb03xbUyKxc9ctsOwf2/YINi9YIOa2Ro7ab8mqqSwk20AZDGPCUvrMViA7ysUKNZY1oaO+gtQjYbXEnYQAqHFD0EHBWZom+d2wPW8/7GOTE5Qv2tA4HPyx9lCyTBV6ys5eo5D/cZkd6eiUtwlPI9ftICh/e7wZQvfkzTBx9QvRS5mPHCOfvA+nF+FkfEk0XWtJO0K52NN33NO9LootX7A82J8C/V4wGu6QIDAQAB
 
 #### Frontend
 
