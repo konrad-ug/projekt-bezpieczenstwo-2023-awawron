@@ -11,7 +11,8 @@ Z kolei jeżeli inna część nie jest dostatecznie dokładna to zapewne uznałe
 
 ### Keycloak
 
-Keycloak odpalony w dockerze z wolumenem komendą "docker run -d --name keycloak -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin -v /path/to/volume:/opt/jboss/keycloak/standalone/data quay.io/keycloak/keycloak:21.1.1 start-dev"
+Keycloak odpalony w dockerze z wolumenem komendą:<br>
+`docker run -d --name keycloak -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin -v /path/to/volume:/opt/jboss/keycloak/standalone/data quay.io/keycloak/keycloak:21.1.1 start-dev`
 
 Eksport skonfigurowanego realm znajduje się w folderze głównym repozytorium w pliku **_realm-export.json_**. Przy tworzeniu nowego realmu w Keycloak jest możliwość wrzucenia tego pliku aby skonfigurować realm.
 
@@ -20,22 +21,23 @@ Z jakiegoś powodu import użytkowników mi nie działa więc potrzebne jest man
 ### Pliki .env
 
 **_frontend/.env_** ma w sobie url Keycloaka, nazwę realmu oraz nazwę klienta. W tym przypadku:
-VITE_KEYCLOAK_URL=http://localhost:8080
-VITE_KEYCLOAK_REALM=Bezp
-VITE_KEYCLOAK_CLIENT=my-app
 
-**_backend/.env_** ma w sobie port, na którym nasłuchuje serwer oraz klucz publiczny z _Realm settings_ => _Keys_ w admin UI Keycloaka. W moim przypadku:
-PORT=5000
-PUBLICKEY=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlsQ3lQ9AbLPMSWvvPAm3HTv1vnt7o2jXiskMPZKt54KI4aY5NMRngsfwPlSSjUNVJIbkOI5/bEelCF8TzXju4zXQHtItfQkFYDNHs7G/ZMeK4P26VYOxsb03xbUyKxc9ctsOwf2/YINi9YIOa2Ro7ab8mqqSwk20AZDGPCUvrMViA7ysUKNZY1oaO+gtQjYbXEnYQAqHFD0EHBWZom+d2wPW8/7GOTE5Qv2tA4HPyx9lCyTBV6ys5eo5D/cZkd6eiUtwlPI9ftICh/e7wZQvfkzTBx9QvRS5mPHCOfvA+nF+FkfEk0XWtJO0K52NN33NO9LootX7A82J8C/V4wGu6QIDAQAB
+<code>VITE_KEYCLOAK_URL=http://localhost:8080<br>
+VITE_KEYCLOAK_REALM=Bezp<br>
+VITE_KEYCLOAK_CLIENT=my-app</code>
+
+**_backend/.env_** ma w sobie port, na którym nasłuchuje serwer oraz klucz publiczny z _Realm settings_ => _Keys_ w admin UI Keycloaka. W moim przypadku:<br>
+<code>PORT=5000
+PUBLICKEY=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlsQ3lQ9AbLPMSWvvPAm3HTv1vnt7o2jXiskMPZKt54KI4aY5NMRngsfwPlSSjUNVJIbkOI5/bEelCF8TzXju4zXQHtItfQkFYDNHs7G/ZMeK4P26VYOxsb03xbUyKxc9ctsOwf2/YINi9YIOa2Ro7ab8mqqSwk20AZDGPCUvrMViA7ysUKNZY1oaO+gtQjYbXEnYQAqHFD0EHBWZom+d2wPW8/7GOTE5Qv2tA4HPyx9lCyTBV6ys5eo5D/cZkd6eiUtwlPI9ftICh/e7wZQvfkzTBx9QvRS5mPHCOfvA+nF+FkfEk0XWtJO0K52NN33NO9LootX7A82J8C/V4wGu6QIDAQAB</code>
 
 ### Frontend
 
-W folderze **_frontend/_** zależności zainstalowane komendą "npm install", projekt React Vite uruchomiony za pomocą "npm run dev".
-Możliwe jest też "npm run build" i "npm run preview", lecz to może wymagać zmiany **Valid redirect URIs** i **Valid post logout redirect URIs** w Keycloak admin UI, ponieważ zmienia się wtedy port, na którym pracujemy.
+W folderze **_frontend/_** zależności zainstalowane komendą `npm install`, projekt React Vite uruchomiony za pomocą `npm run dev`.
+Możliwe jest też `npm run build` i `npm run preview`, lecz to może wymagać zmiany **Valid redirect URIs** i **Valid post logout redirect URIs** w Keycloak admin UI, ponieważ zmienia się wtedy port, na którym pracujemy.
 
 ### Backend
 
-W folderze **_backend/_** zależności zainstalowane komendą "npm install", aplikacja Node Express uruchomiona za pomocą "node index.js". Możliwe jest też użycie "npm start" aby włączyć aplikację z aktywnym nodemonem (może to wymagać instalacji nodemona osobno poprzez "npm install nodemon").
+W folderze **_backend/_** zależności zainstalowane komendą `npm install`, aplikacja Node Express uruchomiona za pomocą `node index.js`. Możliwe jest też użycie `npm start` aby włączyć aplikację z aktywnym nodemonem (może to wymagać instalacji nodemona osobno poprzez `npm install nodemon`).
 
 ## Użycie
 
