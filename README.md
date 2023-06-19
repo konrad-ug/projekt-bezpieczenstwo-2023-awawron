@@ -12,7 +12,8 @@ Z kolei jeżeli inna część nie jest dostatecznie dokładna to zapewne uznałe
 ### Keycloak
 
 Keycloak odpalony w dockerze z wolumenem komendą:<br>
-`docker run -d --name keycloak -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin -v /path/to/volume:/opt/jboss/keycloak/standalone/data quay.io/keycloak/keycloak:21.1.1 start-dev`
+`docker run -d --name keycloak -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin -v /path/to/volume:/opt/jboss/keycloak/standalone/data quay.io/keycloak/keycloak:21.1.1 start-dev`<br>
+/path/to/volume oczywiście musi być zmienione na poprawną ścieżkę.
 
 Eksport skonfigurowanego realm znajduje się w folderze głównym repozytorium w pliku **_realm-export.json_**. Przy tworzeniu nowego realmu w Keycloak jest możliwość wrzucenia tego pliku aby skonfigurować realm.
 
