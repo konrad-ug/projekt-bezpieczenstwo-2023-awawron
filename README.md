@@ -12,7 +12,7 @@ Keycloak odpalony w dockerze z wolumenem komendą "docker run -d --name keycloak
 
 Skonfigurowany realm znajduje się w folderze głównym repozytorium w pliku _realm-export.json_. Przy tworzeniu nowego realmu w Keycloak jest możliwość wrzucenia tego pliku aby skonfigurować realm.
 
-Z jakiegoś powodu eksport użytkowników mi nie zadziałał. Wszystkie ich istotne dane są w pliku user-export.json.
+Z jakiegoś powodu import użytkowników mi nie działa więc potrzebne jest manualne ich dodanie. Wszystkie ich istotne dane dla użytkowników testowych są w pliku _user-export.json_ w folderze głównym repozytorium.
 
 #### Pliki .env
 
@@ -27,12 +27,12 @@ PUBLICKEY=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlsQ3lQ9AbLPMSWvvPAm3HTv1vn
 
 #### Frontend
 
-W folderze _frontend/_ uruchomiony projekt React Vite za pomocą "npm run dev"
+W folderze _frontend/_ zależności zainstalowane komendą "npm install", projekt React Vite uruchomiony za pomocą "npm run dev".
 Możliwe jest też "npm run build" i "npm run preview", lecz to wymaga zmiany **Valid redirect URIs** i **Valid post logout redirect URIs** w Keycloak admin UI, ponieważ zmienia się wtedy port, na którym pracujemy.
 
 #### Backend
 
-W folderze _backend/_ uruchomiona aplikacja Node Express za pomocą "node index.js". Możliwe jest też użycie "npm start" aby włączyć aplikację z aktywnym nodemonem.
+W folderze _backend/_ zależności zainstalowane komendą "npm install", aplikacja Node Express uruchomiona za pomocą "node index.js". Możliwe jest też użycie "npm start" aby włączyć aplikację z aktywnym nodemonem (może to wymagać instalacji nodemona osobno poprzez "npm install nodemon").
 
 ### Użycie
 
