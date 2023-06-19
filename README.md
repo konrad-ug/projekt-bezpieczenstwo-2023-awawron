@@ -69,21 +69,21 @@ Przycisk "Admin Panel" pojawi się po zalogowaniu jako użytkownik z rolą admin
 
 ### Ta aplikacja
 
-1. **_frontend/src/App.jsx_**
+1. **_frontend/src/App.jsx_** |
    Tutaj zaczynamy od wywołania hooka _useAuth_.
 
-2. **_frontend/src/hooks/useAuth.jsx_**
+2. **_frontend/src/hooks/useAuth.jsx_** |
    Tutaj dzieje się większość autoryzacji ze strony frontendowej.
 
    Zaczynamy od inicjalizacji keycloaka z opcją PKCE. Sprawdzone jest czy użytkownik jest już zalogowany. Jeżeli nie to podajemy mu stronę logowania, inaczej przechodzimy dalej.
 
    Jak użytkownik się zaloguje to ustawiamy **isLoggedIn** na **true**, zapisujemy jego **token** i sprawdzamy czy posiada rolę _admin_. Następnie te informacje, razem z prostymi funkcjami do logowania i wylogowywania, są przekazywane dalej. Hook jest updatowany przy każdym nowym renderze, więc sprawdzamy czy dane są wciąż ważne za każdym razem kiedy chcemy dostać się do nowych danych na stronie.
 
-3. **_frontend/src/components/Nav.jsx_**
+3. **_frontend/src/components/Nav.jsx_** |
    Ten komponent mocno się zmienia w zależności od wyżej wymienionych danych. Przycisk "Log In" zmienia się na "Log Out" jeżeli użytkownik jest zalogowany. Przycisk "User Page" przenosi do strony logowania jeżeli użytkownik nie jest zalogowany, lub do strony z danymi użytkownika jeżeli jest. Przycisk "Admin Panel" pojawia się tylko jeżeli użytkownik ma rolę _admin_.
 
-4. **_frontend/src/components/Protected.jsx_**
+4. **_frontend/src/components/Protected.jsx_** |
    Komponent _Protected_ (a także Admin Panel) wysyłają zapytanie do **backendu** o dane, wraz z tokenem uwierzytelniającym. Admin Panel ma dodatkowe kilka warstw sprawdzających czy użytkownik ma odpowiednią rolę.
 
-5. **_backend/Routes/authenticate.js_**
+5. **_backend/Routes/authenticate.js_** |
    Po przekierowaniu zapytania sprawdzamy czy token jest poprawny za pomocą klucza publicznego (w **_.env_**). Jeżeli weryfikacja odbędzie się poprawnie, dane są wysyłane, inaczej wyrzucany jest błąd. Jeżeli spróbujemy wejść w komponent na siłę to dla komponentu _Protected_ dostajemy informację o braku danych, a dla panelu admina dostajemy tylko błąd i napis "Unauthorized".
