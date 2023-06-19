@@ -31,7 +31,7 @@ PUBLICKEY=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlsQ3lQ9AbLPMSWvvPAm3HTv1vn
 ### Frontend
 
 W folderze **_frontend/_** zależności zainstalowane komendą "npm install", projekt React Vite uruchomiony za pomocą "npm run dev".
-Możliwe jest też "npm run build" i "npm run preview", lecz to wymaga zmiany **Valid redirect URIs** i **Valid post logout redirect URIs** w Keycloak admin UI, ponieważ zmienia się wtedy port, na którym pracujemy.
+Możliwe jest też "npm run build" i "npm run preview", lecz to może wymagać zmiany **Valid redirect URIs** i **Valid post logout redirect URIs** w Keycloak admin UI, ponieważ zmienia się wtedy port, na którym pracujemy.
 
 ### Backend
 
@@ -39,11 +39,11 @@ W folderze **_backend/_** zależności zainstalowane komendą "npm install", apl
 
 ## Użycie
 
-W naszym realmie są role app-user oraz app-admin połączone z rolami user I admin w kliencie myclient. W celach testowych mam dane dla użytkownika user o mailu user@gmail.com z rolą user, oraz użytkownika admin admin@gmail.com z rolą admin. Możliwe jest też rejestrowanie nowych użytkowników, domyślnie dostaną oni rolę _user_, jednak nie ma dla nich personalizowanych danych.
+W naszym realmie są role app-user oraz app-admin połączone z rolami user I admin w kliencie myclient. W celach testowych mam dane dla użytkownika user o mailu user@gmail.com z rolą _user_, oraz użytkownika admin admin@gmail.com z rolą _admin_. Możliwe jest też rejestrowanie nowych użytkowników, domyślnie dostaną oni rolę _user_, jednak nie ma dla nich personalizowanych danych.
 
-Po zalogowaniu można wejść w "User Page" (komponent _Protected.jsx_) i pojawi się tam "_username_ data" od serwera. Jeżeli spróbujemy wejść bez logowania zostaniemy przekierowani na stronę główną.
+Po zalogowaniu można wejść w "User Page" (komponent _Protected.jsx_) i pojawi się tam "<_username_> data" od serwera. Jeżeli spróbujemy wejść bez logowania zostaniemy przekierowani na stronę logowania.
 
-Przycisk "Admin Panel" pojawi się po zalogowaniu jako użytkownik z rolą admin. Po wejściu tam dostaniemy "Admin data" od serwera.
+Przycisk "Admin Panel" pojawi się po zalogowaniu jako użytkownik z rolą admin. Po wejściu tam dostaniemy "Admin data" od serwera (oczywiście pod warunkiem, że mamy odpowiednią rolę).
 
 ## Flow
 
