@@ -19,7 +19,7 @@ const useAuth = () => {
     if (isRun.current) return;
 
     isRun.current = true;
-    client.init({}).then((res) => {
+    client.init({ pkceMethod: "S256" }).then((res) => {
       setLogin(res);
       setToken(client.token);
       setIsAdmin(client.hasRealmRole("app-admin"));

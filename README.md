@@ -13,7 +13,7 @@ Z kolei jeżeli inna część nie jest dostatecznie dokładna to zapewne uznałe
 
 Keycloak odpalony w dockerze z wolumenem komendą "docker run -d --name keycloak -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin -v /path/to/volume:/opt/jboss/keycloak/standalone/data quay.io/keycloak/keycloak:21.1.1 start-dev"
 
-Skonfigurowany realm znajduje się w folderze głównym repozytorium w pliku **_realm-export.json_**. Przy tworzeniu nowego realmu w Keycloak jest możliwość wrzucenia tego pliku aby skonfigurować realm.
+Eksport skonfigurowanego realm znajduje się w folderze głównym repozytorium w pliku **_realm-export.json_**. Przy tworzeniu nowego realmu w Keycloak jest możliwość wrzucenia tego pliku aby skonfigurować realm.
 
 Z jakiegoś powodu import użytkowników mi nie działa więc potrzebne jest manualne ich dodanie. Wszystkie ich istotne dane dla użytkowników testowych są w pliku **_user-export.json_** w folderze głównym repozytorium.
 
@@ -51,23 +51,25 @@ Przycisk "Admin Panel" pojawi się po zalogowaniu jako użytkownik z rolą admin
 
 0. Rejestracja klienta: Przed możliwością uwierzytelniania konieczne jest zarejestrowanie klienta w Keycloak.
 
-1. Uwierzytelnianie użytkownika: Użytkownik zostaje przekierowany do formularza uwierzytelniania Keycloak. Tam się loguje.
+1. Uwierzytelnianie użytkownika: Użytkownik klika link do logowania. PKCE: w tym etapie generowany jest też _Code Verifier_ i _Code Challenge_. Wysyłane jest żądanie o autoryzację. Jeżeli użytkownik nie jest zalogowany to zostaje przekierowany do formularza uwierzytelniania Keycloak. Tam się loguje.
 
-2. Wydawanie tokena dostępowego: Po pomyślnym uwierzytelnieniu Keycloak wydaje token dostępowy dla klienta. Token zawiera informacje o użytkowniku, uprawnieniach i okresie ważności.
+2. Kod autoryzacyjny: Po zalogowaniu Keycloak wysyła kod autoryzacyjny, który jest odsyłany razem z _Code Verifier_ (PKCE).
 
-3. Weryfikacja tokenu dostępowego: Weryfikowana jest poprawność podpisu tokena dostępowego przy użyciu klucza publicznego Keycloak. Jeśli weryfikacja jest pomyślna, klient uzyskuje dostęp do zasobów.
+3. Wydawanie tokena dostępowego: Po pomyślnym uwierzytelnieniu (PKCE: za pomocą _Code Verifier_ oraz _Code Challenge_) Keycloak wydaje token dostępowy dla klienta. Token zawiera informacje o użytkowniku, uprawnieniach i okresie ważności.
+
+4. Weryfikacja tokenu dostępowego: Kiedy użytkownik zażąda dostępu do zasobów weryfikowana jest poprawność podpisu tokena dostępowego przy użyciu klucza publicznego Keycloak. Jeśli weryfikacja jest pomyślna, klient uzyskuje dostęp do zasobów.
 
 ### Ta aplikacja
 
 1. **_frontend/src/App.jsx_**
-   Tutaj zaczynamy od wywołania hooka useAuth
+   Tutaj zaczynamy od wywołania hooka _useAuth_.
 
 2. **_frontend/src/hooks/useAuth.jsx_**
    Tutaj dzieje się większość autoryzacji ze strony frontendowej.
 
-   Zaczynamy od inicjalizacji keycloaka, po czym sprawdzamy czy użytkownik jest już zalogowany. Jeżeli nie to podajemy mu stronę logowania, inaczej przechodzimy dalej.
+   Zaczynamy od inicjalizacji keycloaka z opcją PKCE. Sprawdzone jest czy użytkownik jest już zalogowany. Jeżeli nie to podajemy mu stronę logowania, inaczej przechodzimy dalej.
 
-   Jak użytkownik się zaloguje to ustawiamy **isLoggedIn** na **true**, zapisujemy jego **token** i sprawdzamy czy posiada rolę admin. Następnie te informacje, razem z prostymi funkcjami do logowania i wylogowywania, są przekazywane dalej. Hook jest updatowany przy każdym nowym renderze, więc sprawdzamy czy dane są wciąż ważne za każdym razem kiedy chcemy dostać się do nowych danych na stronie.
+   Jak użytkownik się zaloguje to ustawiamy **isLoggedIn** na **true**, zapisujemy jego **token** i sprawdzamy czy posiada rolę _admin_. Następnie te informacje, razem z prostymi funkcjami do logowania i wylogowywania, są przekazywane dalej. Hook jest updatowany przy każdym nowym renderze, więc sprawdzamy czy dane są wciąż ważne za każdym razem kiedy chcemy dostać się do nowych danych na stronie.
 
 3. **_frontend/src/components/Nav.jsx_**
    Ten komponent mocno się zmienia w zależności od wyżej wymienionych danych. Przycisk "Log In" zmienia się na "Log Out" jeżeli użytkownik jest zalogowany. Przycisk "User Page" przenosi do strony logowania jeżeli użytkownik nie jest zalogowany, lub do strony z danymi użytkownika jeżeli jest. Przycisk "Admin Panel" pojawia się tylko jeżeli użytkownik ma rolę _admin_.
